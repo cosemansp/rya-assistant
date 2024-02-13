@@ -1,0 +1,26 @@
+/* If you don't plan to use TailwindCSS in your project, you can remove these imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.crossed-left {
+  background: linear-gradient(
+    to top left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) calc(50% - 0.8px),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) calc(50% + 0.8px),
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.crossed-right {
+  background: linear-gradient(
+    to top right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) calc(50% - 0.8px),
+    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 0) calc(50% + 0.8px),
+    rgba(0, 0, 0, 0) 100%
+  );
+}
