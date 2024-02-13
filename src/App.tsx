@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Outlet, Link } from 'react-router-dom';
 import CompassPage from './pages/compass';
 import TidesPage from './pages/tides';
+import CalcPage from './pages/calc';
 
 // Samples
 // https://www.cockpitcards.co.uk/variation-and-deviation/
@@ -21,6 +22,11 @@ function Layout() {
           <li>
             <Link className="underline" to="/tides">
               Tides
+            </Link>
+          </li>
+          <li>
+            <Link className="underline" to="/calc">
+              Calc`
             </Link>
           </li>
         </ul>
@@ -55,6 +61,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<CompassPage />} />
           <Route path="/tides" element={<TidesPage />} />
+          <Route path="/calc" element={<CalcPage />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
       </Routes>
