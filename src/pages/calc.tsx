@@ -2,7 +2,8 @@ import React from 'react';
 import { set, useForm } from 'react-hook-form';
 
 function degToMin(value: string) {
-  const [deg, min] = value.split('°');
+  const theValue = value.replace('_', '°');
+  const [deg, min] = theValue.split('°');
   const degree = Number(deg);
   if (!min) {
     // only degree
@@ -69,12 +70,12 @@ function CalcVariation() {
           <span className="label-text">
             Magnetic variation (degree)
             <br />
-            <code>Shift-option-8</code>
+            <code>° = Shift-option-8</code>
           </span>
         </div>
         <input
           type="text"
-          placeholder="10°"
+          placeholder="10°w"
           {...register('magnetic')}
           className="input input-bordered w-full max-w-xs"
         />
@@ -85,7 +86,7 @@ function CalcVariation() {
         </div>
         <input
           type="text"
-          placeholder="8'"
+          placeholder="8w (or 8e)"
           {...register('change')}
           className="input input-bordered w-full max-w-xs"
         />

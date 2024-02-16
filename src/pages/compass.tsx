@@ -37,21 +37,21 @@ function CompassPage() {
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      compass: 0,
+      compass: '',
       deviation: '',
       variation: '',
       magnetic: 0,
       leeway: '',
       stream: '',
-      trueCourse: 0,
+      trueCourse: undefined,
 
-      compass2: 0,
+      compass2: '',
       deviation2: '',
       variation2: '',
       magnetic2: 0,
       leeway2: '',
       stream2: '',
-      trueCourse2: 0
+      trueCourse2: undefined
     }
   });
 
@@ -127,7 +127,7 @@ function CompassPage() {
           <div className="mb-6 flex items-center">
             <div className="w-1/4">
               <label htmlFor="compass">
-                <strong>Compass</strong>
+                <strong>Compass (°)</strong>
               </label>
             </div>
             <div className="md:w-3/4">
@@ -135,6 +135,7 @@ function CompassPage() {
                 className="input"
                 type="number"
                 id="compass"
+                placeholder="23"
                 {...register('compass')}
               />
             </div>
@@ -149,6 +150,7 @@ function CompassPage() {
                 className="input"
                 type="text"
                 id="deviation"
+                placeholder="2E (or 2W)"
                 {...register('deviation')}
               />
             </div>
@@ -178,6 +180,7 @@ function CompassPage() {
                 className="input"
                 type="text"
                 id="variation"
+                placeholder="2E (or 2W)"
                 {...register('variation')}
               />
             </div>
@@ -236,7 +239,7 @@ function CompassPage() {
           <div className="mb-6 flex items-center">
             <div className="w-1/4">
               <label htmlFor="trueCourse2">
-                <strong>True</strong>
+                <strong>True (°)</strong>
               </label>
             </div>
             <div className="md:w-4/5">
@@ -244,6 +247,7 @@ function CompassPage() {
                 className="input"
                 type="number"
                 id="trueCourse2"
+                placeholder="23"
                 {...register('trueCourse2')}
               />
             </div>
@@ -286,6 +290,7 @@ function CompassPage() {
                 className="input"
                 type="text"
                 id="variation2"
+                placeholder="2E (or 2W)"
                 {...register('variation2')}
               />
             </div>
@@ -315,6 +320,7 @@ function CompassPage() {
                 className="input"
                 type="text"
                 id="deviation2"
+                placeholder="2E (or 2W)"
                 {...register('deviation2')}
               />
             </div>
