@@ -56,7 +56,7 @@ function NoMatch() {
 function App() {
   return (
     <div>
-      <h1 className="mx-3 mt-3 text-2xl font-bold">Sailing Assistant</h1>
+      <h1 className="mx-3 mt-3 text-2xl font-bold">PeCo Sailing Assistant</h1>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<CompassPage />} />
