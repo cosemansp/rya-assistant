@@ -117,10 +117,13 @@ function CompassPage() {
       </p>
       <br />
 
-      {/* Compass -> True */}
+      <div className="flex flex-wrap p-3">
+        {/* Compass -> True */}
 
-      <div className="flex bg-slate-200 p-3">
-        <div className="w-1/2">
+        <div className="mb-2 mr-2 min-w-[330px] bg-slate-200 p-2">
+          <p className="flex items-center justify-center pb-2 text-xl">
+            Compass (C) to True (T)
+          </p>
           <div className="mb-6 flex items-center">
             <div className="w-1/4">
               <label htmlFor="compass">
@@ -226,7 +229,10 @@ function CompassPage() {
 
         {/* True -> Compass */}
 
-        <div className="w-1/2">
+        <div className="min-w-[330px] bg-slate-200 p-2">
+          <p className="flex items-center justify-center pb-2 text-xl">
+            True (T) to Compass (C)
+          </p>
           <div className="mb-6 flex items-center">
             <div className="w-1/4">
               <label htmlFor="trueCourse2">
