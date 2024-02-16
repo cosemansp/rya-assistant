@@ -16,7 +16,7 @@ function Layout() {
         <ul className="flex space-x-2">
           <li>
             <Link className="underline" to="/">
-              Home
+              Compass
             </Link>
           </li>
           <li>
@@ -35,7 +35,7 @@ function Layout() {
       {/* An <Outlet> renders whatever child route is currently active,
           so you can think about this <Outlet> as a placeholder for
           the child routes we de  fined above. */}
-      <div className="m-3">
+      <div className="mt-3">
         <Outlet />
       </div>
     </div>
@@ -56,7 +56,7 @@ function NoMatch() {
 function App() {
   return (
     <div>
-      <h1 className="text-2xl font-bold">RYA Assistant</h1>
+      <h1 className="mx-3 mt-3 text-2xl font-bold">RYA Assistant</h1>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<CompassPage />} />

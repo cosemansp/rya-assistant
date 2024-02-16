@@ -119,7 +119,7 @@ function CompassPage() {
 
       {/* Compass -> True */}
 
-      <div className="flex bg-slate-200 pt-3">
+      <div className="flex bg-slate-200 p-3">
         <div className="w-1/2">
           <div className="mb-6 flex items-center">
             <div className="w-1/4">

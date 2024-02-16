@@ -30,9 +30,17 @@ const addTime = (time: number, min: number) => {
   return minToHour(t);
 };
 
+const addTide = (value: string, part: number) => {
+  if (!value) {
+    return '';
+  }
+  const highWater = Number(value);
+  return `${(highWater + part).toFixed(2)}m`;
+};
+
 const after = (time: number, startTime: string) => {
   const startMin = hourToMin(startTime);
-  if (time > startMin - 29 && time < startMin + 90) {
+  if (time > startMin - 31 && time < startMin + 61) {
     return true;
   }
   return false;
@@ -41,29 +49,36 @@ const after = (time: number, startTime: string) => {
 export function TidesPage() {
   const [hw, setHw] = React.useState(10 * 60);
   const [time, setTime] = React.useState('10:00');
+  const [range, setRange] = React.useState<number>();
   const {
     register,
-    handleSubmit,
-    setValue,
     watch,
+    getValues,
     formState: { errors }
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
       highWater: '10:00',
       startTime: '9:30',
+      springHeight: '',
+      neapHeight: '',
       dst: false
     }
   });
 
+  const values = getValues();
+
   watch((data, { name, type }) => {
-    // if (name === 'highWater') {
     const hw = hourToMin(data.highWater || '0:00');
     if (data.dst) {
       setHw(hw + 60);
     } else {
       setHw(hw);
     }
+
+    const sprintHeight = Number(data.springHeight?.replace('m', '') || 0);
+    const neapHeight = Number(data.neapHeight?.replace('m', '') || 0);
+    setRange(sprintHeight - neapHeight);
   });
 
   const startTime = watch('startTime');
@@ -73,7 +88,7 @@ export function TidesPage() {
       <div className="flex flex-col">
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">High Water</span>
+            <span className="label-text">High Water (time)</span>
           </div>
           <input
             type="text"
@@ -84,7 +99,7 @@ export function TidesPage() {
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">Start Time</span>
+            <span className="label-text">Begin Travel (time)</span>
           </div>
           <input
             type="text"
@@ -102,10 +117,77 @@ export function TidesPage() {
               className="checkbox-primary checkbox"
             />
           </label>
+          <label className="form-control mt-10 w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Spring Height (m)</span>
+            </div>
+            <input
+              type="text"
+              placeholder="5m"
+              {...register('springHeight')}
+              className="input input-bordered w-full max-w-xs"
+            />
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Neap Height (m)</span>
+            </div>
+            <input
+              type="text"
+              placeholder="2m"
+              {...register('neapHeight')}
+              className="input input-bordered w-full max-w-xs"
+            />
+          </label>
+          <span>Range: {(range || 0).toFixed(2)}m</span>
+          <span>1/12 Range: {((range || 0) / 12).toFixed(2)}m</span>
         </div>
       </div>
       <div className="ml-3 flex">
         <div className="space-y-[12px]">
+          <p>Height (m)</p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, -range)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 11)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 9)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 6)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 3)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, -range / 12)}
+          </p>
+          <p className="h-7  px-1">
+            {values.springHeight ? values.springHeight + 'm' : ''}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, -range / 12)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 3)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 6)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 9)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, (-range / 12) * 11)}
+          </p>
+          <p className="h-7 border px-1">
+            {addTide(values.springHeight, -range)}
+          </p>
+        </div>
+        <div className="mx-2 space-y-[12px]">
+          <p>Hour</p>
           <p className="h-7 border px-1">{addTime(hw, -6 * 60)} (-6)</p>
           <p className="h-7 border px-1">{addTime(hw, -5 * 60)} (-5)</p>
           <p className="h-7 border px-1">{addTime(hw, -4 * 60)} (-4)</p>
@@ -122,7 +204,7 @@ export function TidesPage() {
           <p className="h-7 border px-1">{addTime(hw, 5 * 60)} (+5)</p>
           <p className="h-7 border px-1">{addTime(hw, 6 * 60)} (+6)</p>
         </div>
-        <div className="m-1 my-[15px]">
+        <div className="my-[50px]">
           <div className="crossed-right h-4 w-4" />
           <div className="crossed-left mt-2 h-4 w-4" />
           <div className="crossed-right h-4 w-4" />
@@ -149,103 +231,106 @@ export function TidesPage() {
           <div className="crossed-right h-4 w-4" />
           <div className="crossed-left mt-2 h-4 w-4" />
         </div>
-        <div className="my-[20px] space-y-[16px]">
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 - 6 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 - 6 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 - 5 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 - 5 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 - 4 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 - 4 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 - 3 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 - 3 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 - 2 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 - 2 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw - 30, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, -30)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 + 1 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 + 1 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 + 2 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 + 2 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 + 3 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 + 3 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 + 4 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 + 4 * 60)}
-          </p>
-          <p
-            className={clsx(
-              'h-6 border px-1',
-              after(hw + 30 + 5 * 60, startTime) && 'text-green-600'
-            )}
-          >
-            {addTime(hw, +30 + 5 * 60)}
-          </p>
+        <div className="mx-2">
+          <p>Travel</p>
+          <div className="my-[30px] space-y-[16px]">
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 - 6 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 - 6 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 - 5 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 - 5 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 - 4 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 - 4 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 - 3 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 - 3 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 - 2 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 - 2 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw - 30, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, -30)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 + 1 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 + 1 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 + 2 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 + 2 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 + 3 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 + 3 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 + 4 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 + 4 * 60)}
+            </p>
+            <p
+              className={clsx(
+                'h-6 border px-1',
+                after(hw + 30 + 5 * 60, startTime) && 'text-green-600'
+              )}
+            >
+              {addTime(hw, +30 + 5 * 60)}
+            </p>
+          </div>
         </div>
       </div>
     </div>
