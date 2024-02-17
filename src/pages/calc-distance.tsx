@@ -58,7 +58,7 @@ export function CalcDistance() {
         />
       </label>
       <p className="mt-3 border border-slate-400 p-3">
-        distance = time * speed
+        distance = speed * time
       </p>
     </div>
   );
