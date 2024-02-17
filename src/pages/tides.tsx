@@ -1,14 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
-
-const hourToMin = (hour: string) => {
-  if (!hour.includes(':')) {
-    return Number(hour) * 60;
-  }
-  const [h, m] = hour.split(':').map(Number);
-  return h * 60 + m;
-};
+import { hourToMin } from '../utils';
 
 const minToHour = (min: number) => {
   const h = Math.floor(min / 60);
@@ -237,7 +230,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 - 6 * 60, startTime) && 'text-green-600'
+                after(hw + 30 - 6 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 - 6 * 60)}
@@ -245,7 +238,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 - 5 * 60, startTime) && 'text-green-600'
+                after(hw + 30 - 5 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 - 5 * 60)}
@@ -253,7 +246,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 - 4 * 60, startTime) && 'text-green-600'
+                after(hw + 30 - 4 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 - 4 * 60)}
@@ -261,7 +254,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 - 3 * 60, startTime) && 'text-green-600'
+                after(hw + 30 - 3 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 - 3 * 60)}
@@ -269,7 +262,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 - 2 * 60, startTime) && 'text-green-600'
+                after(hw + 30 - 2 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 - 2 * 60)}
@@ -277,7 +270,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw - 30, startTime) && 'text-green-600'
+                after(hw - 30, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, -30)}
@@ -285,7 +278,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30, startTime) && 'text-green-600'
+                after(hw + 30, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30)}
@@ -293,7 +286,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 + 1 * 60, startTime) && 'text-green-600'
+                after(hw + 30 + 1 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 + 1 * 60)}
@@ -301,7 +294,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 + 2 * 60, startTime) && 'text-green-600'
+                after(hw + 30 + 2 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 + 2 * 60)}
@@ -309,7 +302,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 + 3 * 60, startTime) && 'text-green-600'
+                after(hw + 30 + 3 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 + 3 * 60)}
@@ -317,7 +310,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 + 4 * 60, startTime) && 'text-green-600'
+                after(hw + 30 + 4 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 + 4 * 60)}
@@ -325,7 +318,7 @@ export function TidesPage() {
             <p
               className={clsx(
                 'h-6 border px-1',
-                after(hw + 30 + 5 * 60, startTime) && 'text-green-600'
+                after(hw + 30 + 5 * 60, startTime) && 'text-red-600'
               )}
             >
               {addTime(hw, +30 + 5 * 60)}
