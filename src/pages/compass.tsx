@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm } from 'react-hook-form';
 import React from 'react';
+import { CalcVariation } from './calc-travel';
 
 const getValue = (str: string | undefined | null) => {
   const value = str?.toLowerCase() || '0';
@@ -340,6 +341,9 @@ function CompassPage() {
               />
             </div>
           </div>
+        </div>
+        <div className="ml-2">
+          <CalcVariation />
         </div>
       </div>
     </div>

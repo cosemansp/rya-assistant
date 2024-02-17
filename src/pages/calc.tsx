@@ -12,7 +12,7 @@ function CalcPage() {
       <CalcTime />
       <CalcSpeed />
       <CalcDistance />
-      <CalcVariation />
+      {/* <CalcVariation /> */}
     </div>
   );
 }
