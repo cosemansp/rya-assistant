@@ -36,9 +36,20 @@ export const minToHour = (min: number) => {
  * 10:00 -> 600 (min)
  */
 export const hourToMin = (hour: string) => {
-  if (!hour.includes(':')) {
+  if (hour.length === 2) {
     return Number(hour) * 60;
   }
-  const [h, m] = hour.split(':').map(Number);
-  return h * 60 + m;
+
+  if (hour.includes(':')) {
+    const [h, m] = hour.split(':').map(Number);
+    return h * 60 + m;
+  }
+
+  if (hour.length != 4) {
+    return NaN;
+  }
+
+  const hourPart = hour.substring(0, hour.length - 2);
+  const minPart = hour.substring(2, hour.length);
+  return Number(hourPart) * 60 + Number(minPart);
 };

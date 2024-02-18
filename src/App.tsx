@@ -26,7 +26,7 @@ function Layout() {
           </li>
           <li>
             <Link className="underline" to="/calc">
-              Calc`
+              Calc
             </Link>
           </li>
         </ul>
