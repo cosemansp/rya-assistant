@@ -120,7 +120,7 @@ export function TidesPage() {
           <br />
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">Begin Travel (time)</span>
+              <span className="label-text">Measure Time</span>
             </div>
             <input
               type="text"
