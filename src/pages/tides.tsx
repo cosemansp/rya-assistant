@@ -77,11 +77,11 @@ export function TidesPage() {
   const startTime = watch('startTime');
 
   return (
-    <div className="flex bg-slate-200 p-2">
+    <div className="flex bg-slate-200 p-1 md:p-2">
       <div className="flex flex-col">
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">High Water (time)</span>
+            <span className="label-text">High Tide (time)</span>
           </div>
           <input
             type="text"
@@ -90,29 +90,10 @@ export function TidesPage() {
             className="input input-bordered w-full max-w-xs"
           />
         </label>
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">Begin Travel (time)</span>
-          </div>
-          <input
-            type="text"
-            placeholder="10:00"
-            {...register('startTime')}
-            className="input input-bordered w-full max-w-xs"
-          />
-        </label>
         <div className="form-control">
-          <label className="label cursor-pointer">
-            <span className="label-text">DST</span>
-            <input
-              type="checkbox"
-              {...register('dst')}
-              className="checkbox-primary checkbox"
-            />
-          </label>
-          <label className="form-control mt-10 w-full max-w-xs">
+          <label className="form-control mt-1 w-full max-w-xs">
             <div className="label">
-              <span className="label-text">Spring Height (m)</span>
+              <span className="label-text">Hight Tide (m)</span>
             </div>
             <input
               type="text"
@@ -123,7 +104,7 @@ export function TidesPage() {
           </label>
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">Neap Height (m)</span>
+              <span className="label-text">Low Tide (m)</span>
             </div>
             <input
               type="text"
@@ -134,11 +115,33 @@ export function TidesPage() {
           </label>
           <span>Range: {(range || 0).toFixed(2)}m</span>
           <span>1/12 Range: {((range || 0) / 12).toFixed(2)}m</span>
+          <br />
+          <br />
+          <br />
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Begin Travel (time)</span>
+            </div>
+            <input
+              type="text"
+              placeholder="10:00"
+              {...register('startTime')}
+              className="input input-bordered w-full max-w-xs"
+            />
+          </label>
+          <label className="label cursor-pointer">
+            <span className="label-text">DST</span>
+            <input
+              type="checkbox"
+              {...register('dst')}
+              className="checkbox-primary checkbox"
+            />
+          </label>
         </div>
       </div>
-      <div className="ml-3 flex">
+      <div className="ml-1 flex">
         <div className="space-y-[12px]">
-          <p>Height (m)</p>
+          <p>H (m)</p>
           <p className="h-7 border px-1">
             {addTide(values.springHeight, -range)}
           </p>
@@ -181,12 +184,24 @@ export function TidesPage() {
         </div>
         <div className="mx-2 space-y-[12px]">
           <p>Hour</p>
-          <p className="h-7 border px-1">{addTime(hw, -6 * 60)} (-6)</p>
-          <p className="h-7 border px-1">{addTime(hw, -5 * 60)} (-5)</p>
-          <p className="h-7 border px-1">{addTime(hw, -4 * 60)} (-4)</p>
-          <p className="h-7 border px-1">{addTime(hw, -3 * 60)} (-3)</p>
-          <p className="h-7 border px-1">{addTime(hw, -2 * 60)} (-2)</p>
-          <p className="h-7 border px-1">{addTime(hw, -1 * 60)} (-1)</p>
+          <p className="h-7 whitespace-nowrap border px-1">
+            {addTime(hw, -6 * 60)} (-6)
+          </p>
+          <p className="h-7 whitespace-nowrap border px-1">
+            {addTime(hw, -5 * 60)} (-5)
+          </p>
+          <p className="h-7 whitespace-nowrap border px-1">
+            {addTime(hw, -4 * 60)} (-4)
+          </p>
+          <p className="h-7 whitespace-nowrap border px-1">
+            {addTime(hw, -3 * 60)} (-3)
+          </p>
+          <p className="h-7 whitespace-nowrap border px-1">
+            {addTime(hw, -2 * 60)} (-2)
+          </p>
+          <p className="h-7 whitespace-nowrap border px-1">
+            {addTime(hw, -1 * 60)} (-1)
+          </p>
           <p className="h-7 rounded border border-slate-600 px-1">
             {addTime(hw, 0)}
           </p>
